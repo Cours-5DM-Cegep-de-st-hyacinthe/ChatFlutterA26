@@ -1,4 +1,5 @@
 import 'package:chatdemo/model/Message.dart';
+import 'package:chatdemo/vue/components/vue_envoyer_message.dart';
 import 'package:chatdemo/vue/components/vue_message_list.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,12 @@ class PagePrincipale extends StatefulWidget{
 class _PagePrincipaleState extends State<PagePrincipale> {
   List<Message>? messages;
 
+  void _sauvegarderMessage (String alias, String message) {
+    setState(() {
+      messages?.add(Message(alias: alias, message: message));
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -22,7 +29,11 @@ class _PagePrincipaleState extends State<PagePrincipale> {
 
   @override
   Widget build(BuildContext context) {
-    return VueMessageList(messages: messages!);
+    return Column(
+      children: [
+        VueMessageList(messages: messages!),
+        VueEnvoyerMessage(envoyerMessage: _sauvegarderMessage)
+    ],);
   }
   
 }
