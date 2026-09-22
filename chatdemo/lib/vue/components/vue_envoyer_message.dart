@@ -1,10 +1,9 @@
+import 'package:chatdemo/controleur/message_controleur.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VueEnvoyerMessage extends StatelessWidget {
-  
-  final Function envoyerMessage;
-
-  const VueEnvoyerMessage({super.key, required this.envoyerMessage});
+  const VueEnvoyerMessage({super.key});
   
   @override
   Widget build(BuildContext context) {
@@ -12,7 +11,7 @@ class VueEnvoyerMessage extends StatelessWidget {
 
     return Row(children: [
       Expanded(child: TextField(controller: textControlleur)),
-      IconButton(onPressed: () => envoyerMessage('Anonyme', textControlleur.text), 
+      IconButton(onPressed: () => context.read<MessageControleur>().addMessage("Anonyme", textControlleur.text), 
         icon: const Icon(Icons.send))
     ],);
   }
